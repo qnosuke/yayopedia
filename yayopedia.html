@@ -87,7 +87,6 @@
         }
 
         /* Main Content */
-        .main-content {
             padding: 120px 0 80px;
         }
 
@@ -467,7 +466,9 @@
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <nav class="nav">
+        <div class="articles-grid" id="articles-container">
+            <!-- 記事はJavaScriptで動的に読み込まれます -->
+        </div>            <nav class="nav">
                 <a href="index.html" class="logo">弥生ポータル</a>
                 <ul class="nav-links">
                     <li><a href="yayopedia.html" class="active">Yayopedia</a></li>
@@ -479,9 +480,10 @@
     </header>
 
     <!-- Main Content -->
-    <main class="main-content">
         <div class="container">
-            <h1 class="page-title">Yayopedia</h1>
+        <div class="articles-grid" id="articles-container">
+            <!-- 記事はJavaScriptで動的に読み込まれます -->
+        </div>            <h1 class="page-title">Yayopedia</h1>
             <p class="page-subtitle">弥生に関するすべての知識がここに</p>
 
             <!-- Stats Section -->
@@ -557,7 +559,9 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p class="footer-text">
+        <div class="articles-grid" id="articles-container">
+            <!-- 記事はJavaScriptで動的に読み込まれます -->
+        </div>            <p class="footer-text">
                 © 2025 弥生ポータル - Yayopedia
             </p>
         </div>
@@ -1153,5 +1157,5 @@
             }
         });
     </script>
-</body>
+<script src="load_data.js"></script></body>
 </html>
