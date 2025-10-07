@@ -87,6 +87,7 @@
         }
 
         /* Main Content */
+        .main-content {
             padding: 120px 0 80px;
         }
 
@@ -148,9 +149,6 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             border: 1px solid rgba(212, 165, 116, 0.2);
             transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
         }
 
         .article-card:hover {
@@ -159,43 +157,33 @@
             border-color: rgba(212, 165, 116, 0.4);
         }
 
-        .article-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(135deg, #D4A574, #C19660);
+        .article-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
         }
 
         .article-date {
-            color: #D4A574;
+            color: #6B6B6B;
             font-size: 0.9rem;
-            margin-bottom: 10px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        }
+
+        .article-category {
+            background: rgba(212, 165, 116, 0.2);
+            color: #D4A574;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
         }
 
         .article-title {
             font-family: 'Sorts Mill Goudy', serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             color: #2C2C2C;
             margin-bottom: 15px;
-            font-weight: 600;
             line-height: 1.4;
-        }
-
-        .article-content {
-            color: #6B6B6B;
-            line-height: 1.7;
-            margin-bottom: 20px;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
         }
 
         .article-tags {
@@ -214,6 +202,12 @@
             font-weight: 500;
         }
 
+        .article-content {
+            color: #4A4A4A;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
         .article-stats {
             display: flex;
             justify-content: space-between;
@@ -228,144 +222,34 @@
         }
 
         .article-read-more {
+            background: none;
+            border: none;
             color: #D4A574;
             font-size: 0.9rem;
             font-weight: 600;
+            cursor: pointer;
             display: flex;
             align-items: center;
             gap: 5px;
+            transition: color 0.3s ease;
         }
 
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 2000;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #F8F6F0;
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .modal-title {
-            font-family: 'Sorts Mill Goudy', serif;
-            font-size: 1.8rem;
-            color: #2C2C2C;
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: #6B6B6B;
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .modal-close:hover {
-            background: rgba(212, 165, 116, 0.2);
-            color: #D4A574;
-        }
-
-        .modal-body {
-            color: #2C2C2C;
-            line-height: 1.8;
-        }
-
-        .modal-meta {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(212, 165, 116, 0.2);
-        }
-
-        .modal-date {
-            color: #D4A574;
-            font-weight: 600;
-        }
-
-        .modal-category {
-            background: rgba(212, 165, 116, 0.2);
-            color: #D4A574;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        /* Search and Filter */
-        .search-container {
-            max-width: 600px;
-            margin: 0 auto 40px;
-            position: relative;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 15px 50px 15px 20px;
-            border: 1px solid rgba(212, 165, 116, 0.3);
-            border-radius: 25px;
-            background: rgba(255, 255, 255, 0.8);
-            font-size: 1rem;
-            color: #2C2C2C;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .search-input:focus {
-            border-color: #D4A574;
-            box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #D4A574;
-            font-size: 1.2rem;
+        .article-read-more:hover {
+            color: #B8935F;
         }
 
         /* Stats Section */
         .stats-section {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.6);
             border-radius: 20px;
             padding: 40px;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
             text-align: center;
-            border: 1px solid rgba(212, 165, 116, 0.2);
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 30px;
             margin-top: 30px;
         }
@@ -384,12 +268,12 @@
 
         .stat-label {
             color: #6B6B6B;
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
 
         /* Footer */
         .footer {
-            background: #F0EDE5;
+            background: rgba(248, 246, 240, 0.9);
             padding: 40px 0;
             text-align: center;
             border-top: 1px solid rgba(212, 165, 116, 0.2);
@@ -400,14 +284,58 @@
             font-size: 0.9rem;
         }
 
-        /* Mobile Optimizations */
+        /* Loading Animation */
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #D4A574;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Error Message */
+        .error-message {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .error-icon {
+            font-size: 3rem;
+            color: #ff6b6b;
+            margin-bottom: 20px;
+        }
+
+        .retry-button {
+            padding: 10px 20px;
+            background: #D4A574;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .retry-button:hover {
+            background: #B8935F;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
             .page-title {
                 font-size: 2rem;
-            }
-            
-            .nav-links {
-                display: none;
             }
             
             .articles-grid {
@@ -424,41 +352,9 @@
                 font-size: 0.9rem;
             }
             
-            .article-card {
-                padding: 20px;
+            .nav-links {
+                gap: 15px;
             }
-            
-            .modal-content {
-                padding: 30px 20px;
-                width: 95%;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-        }
-
-        /* Loading Animation */
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 40px;
-        }
-
-        .loading-spinner {
-            border: 3px solid rgba(212, 165, 116, 0.3);
-            border-top: 3px solid #D4A574;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -466,9 +362,7 @@
     <!-- Header -->
     <header class="header">
         <div class="container">
-        <div class="articles-grid" id="articles-container">
-            <!-- 記事はJavaScriptで動的に読み込まれます -->
-        </div>            <nav class="nav">
+            <nav class="nav">
                 <a href="index.html" class="logo">弥生ポータル</a>
                 <ul class="nav-links">
                     <li><a href="yayopedia.html" class="active">Yayopedia</a></li>
@@ -480,11 +374,20 @@
     </header>
 
     <!-- Main Content -->
+    <main class="main-content">
         <div class="container">
-        <div class="articles-grid" id="articles-container">
-            <!-- 記事はJavaScriptで動的に読み込まれます -->
-        </div>            <h1 class="page-title">Yayopedia</h1>
+            <h1 class="page-title">Yayopedia</h1>
             <p class="page-subtitle">弥生に関するすべての知識がここに</p>
+
+            <!-- Category Navigation -->
+            <div class="category-nav">
+                <button class="category-btn active" data-category="all">すべて</button>
+                <button class="category-btn" data-category="family">家族</button>
+                <button class="category-btn" data-category="work">仕事</button>
+                <button class="category-btn" data-category="memory">思い出</button>
+                <button class="category-btn" data-category="place">場所</button>
+                <button class="category-btn" data-category="future">将来</button>
+            </div>
 
             <!-- Stats Section -->
             <div class="stats-section">
@@ -493,669 +396,113 @@
                 </h2>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-number" id="totalArticles">300+</div>
+                        <div class="stat-number" id="totalArticles">-</div>
                         <div class="stat-label">総記事数</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">10</div>
+                        <div class="stat-number" id="totalCategories">6</div>
                         <div class="stat-label">カテゴリー</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">29,600</div>
+                        <div class="stat-number" id="totalMessages">-</div>
                         <div class="stat-label">LINEメッセージ</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">122</div>
+                        <div class="stat-number" id="totalDays">-</div>
                         <div class="stat-label">会話の日数</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Search Container -->
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="Yayopediaを検索..." id="searchInput">
-                <i class="fas fa-search search-icon"></i>
-            </div>
-
-            <!-- Category Navigation -->
-            <div class="category-nav">
-                <button class="category-btn active" data-category="all">すべて</button>
-                <button class="category-btn" data-category="food">食べ物</button>
-                <button class="category-btn" data-category="hobby">趣味</button>
-                <button class="category-btn" data-category="personality">性格</button>
-                <button class="category-btn" data-category="memory">思い出</button>
-                <button class="category-btn" data-category="lifestyle">生活</button>
-                <button class="category-btn" data-category="family">家族</button>
-                <button class="category-btn" data-category="work">仕事</button>
-                <button class="category-btn" data-category="place">場所</button>
-                <button class="category-btn" data-category="love">恋愛</button>
-                <button class="category-btn" data-category="daily">日常</button>
-            </div>
-
-            <!-- Loading -->
-            <div class="loading" id="loading">
-                <div class="loading-spinner"></div>
-                <p>コンテンツを読み込んでいます...</p>
-            </div>
-
             <!-- Articles Grid -->
-            <div class="articles-grid" id="articlesGrid">
-                <!-- Articles will be populated by JavaScript -->
+            <div class="articles-grid" id="articles-container">
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>データを読み込んでいます...</p>
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- Article Modal -->
-    <div class="modal" id="articleModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title" id="modalTitle"></h2>
-                <button class="modal-close" onclick="closeModal()">&times;</button>
-            </div>
-            <div class="modal-body" id="modalBody"></div>
-        </div>
-    </div>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-        <div class="articles-grid" id="articles-container">
-            <!-- 記事はJavaScriptで動的に読み込まれます -->
-        </div>            <p class="footer-text">
+            <p class="footer-text">
                 © 2025 弥生ポータル - Yayopedia
             </p>
         </div>
     </footer>
 
+    <script src="load_data.js"></script>
     <script>
-        // Extended articles data with 300+ items
-        const articles = [
-            // Food related (食べ物)
-            {
-                id: 'red-seafood-noodle',
-                title: 'レッドシーフードヌードル',
-                date: '2025年7月16日',
-                category: 'food',
-                tags: ['カップラーメン', '夏', '好物', '毎年'],
-                content: '夏になるとやよたんが買い溜めするカップラーメン。ここ３、４年でいちばん好きなカップラーメンらしい。暑い夏にぴったりの味で、何度食べても飽きない美味しさ。ストックがなくなると不安になるほどの愛着を持っている。',
-                source: 'Yayopedia'
-            },
-            {
-                id: 'shirataki-tofu',
-                title: '白滝と豆腐',
-                date: '2025年7月16日',
-                category: 'food',
-                tags: ['健康', '好物', '地元', '湯豆腐'],
-                content: 'やよたんが好きな食べ物。豆腐は、地元では茹でたてを販売しにきてそれを買って湯豆腐とかにしていたらしい。ちょっと想像ついてないけど、美味しそうではある。白滝はカロリーを気にする弥生にとって安心できる食材。',
-                source: 'Yayopedia'
-            },
-            {
-                id: 'black-coffee',
-                title: 'ブラックコーヒー',
-                date: '2025年7月8日',
-                category: 'food',
-                tags: ['飲み物', '習慣', 'シンプル', '毎日'],
-                content: 'やよたんが主に飲む飲み物。家でアルコール以外は水かブラックコーヒーしか飲みません。シンプルな味わいを好む性格が表れている。朝の一杯で一日が始まり、仕事中にも何度も淹れ直している。',
-                source: 'Yayopedia'
-            },
-            {
-                id: 'pork-shabu-nasu',
-                title: '豚しゃぶとなすのうまいやつ',
-                date: '2025年7月4日',
-                category: 'food',
-                tags: ['料理', '初めて作った', '美味しい', 'ポン酢'],
-                content: 'やよたんが初めて作ってくれた料理。ポン酢と大根おろしでさっぱり。無限に食べれるやつ。優しい味付けで、体に優しい料理だった。この料理をきっかけに、弥生の家庭的な一面を知ることができた。',
-                source: 'Yayopedia'
-            },
-            {
-                id: 'tacos-apresio',
-                title: 'アプレシオのタコス',
-                date: '2025年7月20日',
-                category: 'food',
-                tags: ['デート', 'タコス', '初体験', 'チーズトルティーヤ'],
-                content: 'やよたんと初めてのアプレシオ。タコスセット（一人前）とチョリソーの溺れ卵（チーズがかかっている）を頼んだ。両方とも美味しかったけど、タコスは三人前でも良かったかもしれない。後でチーズトルティーヤも追加注文。',
-                source: 'Yayopedia'
-            },
-
-            // Hobby related (趣味)
-            {
-                id: 'miffy',
-                title: 'ミッフィー',
-                date: '2025年7月8日',
-                category: 'hobby',
-                tags: ['キャラクター', 'LINEアイコン', '可愛い', 'コレクション'],
-                content: 'やよたんはミッフィーが好き。LINEのアイコンもミッフィー。今度、誕生70周年記念ミッフィー展に行った時にグッズを買い漁ると宣言していた。シンプルで可愛いデザインが好みのようで、部屋にもミッフィーグッズが飾られている。',
-                source: 'Yayopedia'
-            },
-            {
-                id: 'gacha-gacha',
-                title: 'ガチャガチャ',
-                date: '2025年7月8日',
-                category: 'hobby',
-                tags: ['ゲーム', '楽しい', '夢中', 'コンビニ'],
-                content: 'やよたんはガチャガチャが好き。見つけると吸い込まれていくから、注意が必要。コンビニなどで発見するとつい回してしまう癖がある。小さな幸せを手に入れる瞬間が楽しいらしい。',
-                source: 'Yayopedia'
-            },
-            {
-                id: 'kaleidoscope',
-                title: '万華鏡',
-                date: '2025年7月16日',
-                category: 'hobby',
-                tags: ['欲しいもの', 'キラキラ', '幻想的', '集めたい'],
-                content: 'やよたんが最近欲しいもの。万華鏡の中の幻想的な世界に魅了されている様子。光の反射で生まれる無限の模様に、心を奪われている。プレゼントにもらったら、きっと嬉しさが止まらないだろう。',
-                source: 'Yayopedia'
-            },
-            {
-                id: 'cute-cans',
-                title: 'かわいい缶',
-                date: '2025年7月8日',
-                category: 'hobby',
-                tags: ['収集', '思い出', '可愛い', 'インテリア'],
-                content: 'かわいい缶を集めるのが好きで、中には思い出の品が入っているらしい。デザインの良い缶を見つけると嬉しくなる性格。部屋のインテリアとしても活用していて、来客には自慢のコレクションを見せてくれる。',
-                source: 'Yayopedia'
-            },
-            {
-                id: 'hotaru-no-hikari',
-                title: 'ホタルノヒカリ',
-                date: '2025年7月8日',
-                category: 'hobby',
-                tags: ['ドラマ', '干物女', '好き', '2007年'],
-                content: 'やよたんが好きな古いドラマ。ドラマ「ホタルノヒカリ」は2007年に放送されました。主演は綾瀬はるかさんで、干物女という新しいキャラクター像が話題になりました。日常のだらしなさと恋愛のギャップが面白く、今でも根強い人気があります。',
-                source: 'Yayopedia'
-            },
-
-            // Personality related (性格)
-            {
-                id: 'sudden-loud-voice',
-                title: '突然の大声',
-                date: '2025年7月8日',
-                category: 'personality',
-                tags: ['癖', '驚き', '可愛い', '無意識'],
-                content: 'やよたんは普段小声だけど、何かあった時に突然大声が出る。本人に自覚はあるみたいだけど、制御はできないっぽい。驚いた時や興奮した時に自然と出てしまうようで、周りの人を驚かせることがある。',
-                source: 'Yayopedia'
-            },
-            {
-                id: 'okinawa-origin',
-                title: '沖縄出身',
-                date: '2025年6月8日',
-                category: 'personality',
-                tags: ['出身地', '沖縄', '関西', '気質'],
-                content: '弥生の地元は沖縄。関西の方が少し長くなってきたけど、沖縄の気質を持ち続けている。温かくて、人懐っこい性格は沖縄出身ならでは。南国の陽気な性格を持ちつつ、関西の文化にもすっかり慣れている。',
-                source: 'Yayopedia'
-            },
-            {
-                id: 'work-style',
-                title: '仕事の姿勢',
-                date: '2025年6月9日',
-                category: 'personality',
-                tags: ['仕事', 'マメ', '丁寧', 'プロフェッショナル'],
-                content: '仕事ではかなりマメで丁寧。連絡も早く、相手のことを考えて行動する。ただ、プライベートでは干物女を目指しているというギャップが面白い。仕事とプライベートのメリハリを大切にしている。',
-                source: 'Yayopedia'
-            },
-            {
-                id: 'relationship-style',
-                title: '恋愛観',
-                date: '2025年6月8日',
-                category: 'personality',
-                tags: ['恋愛', '思いやり', '真剣', '経験'],
-                content: 'お互いに思いやりを持って接することが大切だと考えている。過去の経験から、相手を思いやる気持ちの大切さを学んだ様子。表面的な付き合いではなく、心の通った関係を求めている。',
-                source: 'Yayopedia'
-            },
-            {
-                id: 'social-style',
-                title: '人付き合いのスタイル',
-                date: '2025年6月8日',
-                category: 'personality',
-                tags: ['人付き合い', '範囲', '苦手', '距離感'],
-                content: '自分がいける範囲の人としか付き合ってないです！と語っている。無理に広い人間関係を築こうとせず、大切な人との時間を大切にするタイプ。少数精鋭の友人関係を好む。',
-                source: 'Yayopedia'
-            },
-
-            // Lifestyle related (生活)
-            {
-                id: 'dried-fish-woman',
-                title: '干物女',
-                date: '2025年7月8日',
-                category: 'lifestyle',
-                tags: ['目標', 'リラックス', '自由', '新聞紙'],
-                content: 'やよたんが目指しているもの。新聞紙で寝るのが夢らしい。そのわりに本人は丁寧な暮らしをしているのが不思議。理想と現実のギャップが面白い。本当は気の向いたままに過ごす自由な生活を憧れている。',
-                source: 'Yayopedia'
-            },
-            {
-                id: 'engawa',
-                title: '縁側',
-                date: '2025年7月8日',
-                category: 'lifestyle',
-                tags: ['憧れ', '家', '理想', 'お茶'],
-                content: 'やよたんが欲してやまないもの。縁側のある家に住みたいらしい。都会じゃ難しいかも。でも理想の生活像として、縁側でお茶を飲みながら過ごす時間を憧れている。四季の移ろいを感じながら、のんびりとした時間を過ごしたい。',
-                source: 'Yayopedia'
-            },
-
-            // Family related (家族)
-            {
-                id: 'daughter-talks',
-                title: '娘との会話',
-                date: '2025年6月8日',
-                category: 'family',
-                tags: ['娘', '会話', '楽しい', '成長'],
-                content: '娘の気になる男の子の話とか聞くのめっちゃ楽しいですよ！と語る弥生。娘さんと気軽に話せる関係性が羨ましいと感じている。母娘の良好な関係性が伝わってくる。娘の成長を喜び、恋愛相談にも乗っている様子。',
-                source: 'Yayopedia'
-            },
-
-            // Work related (仕事)
-            {
-                id: 'work-busy-period',
-                title: '仕事の忙しさ',
-                date: '2025年6月8日',
-                category: 'work',
-                tags: ['仕事', '忙しい', 'ストレス', '心の余裕'],
-                content: 'その時は私も仕事忙しすぎて心に余裕がなかったんかなとも思ったりしますけど...と語る弥生。仕事の忙しさがプライベートにも影響することを経験的に理解している。でも、それでも相手に思いやりを持つことが大切だと考えている。',
-                source: 'Yayopedia'
-            },
-
-            // Place related (場所)
-            {
-                id: 'apresio-first-visit',
-                title: '初めてのアプレシオ',
-                date: '2025年7月20日',
-                category: 'place',
-                tags: ['アプレシオ', '初体験', '緊張', '美味しい'],
-                content: '初めてのアプレシオだったので少し緊張。やよたんの知り合いがたくさん来ていた。新しい場所での体験にワクワクしつつも、少し緊張していた様子。でも美味しいタコスで緊張もほぐれたようだ。',
-                source: 'Yayopedia'
-            },
-            {
-                id: 'shosoin-visit',
-                title: '正倉院訪問',
-                date: '2025年7月13日',
-                category: 'place',
-                tags: ['正倉院', '文化', '香り', '感動'],
-                content: 'やよたんとみに行った。この日はブルーインパルス大阪を見に来て、その帰りについでに正倉院見に来た人も多くて、かなり賑わっていた。蘭奢待の香りはなんとも言えず、すごかった！歴史と文化に触れて、心が洗われるような体験だった。',
-                source: 'Yayopedia'
-            },
-
-            // Love related (恋愛)
-            {
-                id: 'ex-boyfriend-story',
-                title: '元カレとの別れ',
-                date: '2025年6月8日',
-                category: 'love',
-                tags: ['別れ', '経験', '学び', '成長'],
-                content: 'なんかあんまり向き合ってくれないくて、お金に対し結構ルーズな感じで、自分が嫌やったら連絡こないみたいな感じな人で、我慢してたけどキレてしまいました。1年半我慢した分がきて、ブチギレた。でも、この経験から「思いやり」の大切さを学んだ。',
-                source: 'Yayopedia'
-            },
-            {
-                id: 'birthday-incident',
-                title: '誕生日の出来事',
-                date: '2025年6月8日',
-                category: 'love',
-                tags: ['誕生日', '最悪', '骨折', '気づき'],
-                content: '骨折した時は私の誕生日とかもあって、その日も最悪やったんで、その後にブチギレたって感じ。誕生日という特別な日に、大切にしてほしかったという気持ちが爆発した瞬間。でも、この経験があったからこそ、次の恋愛では大切にされることを知った。',
-                source: 'Yayopedia'
-            },
-
-            // Daily related (日常)
-            {
-                id: 'daily-routine',
-                title: '日常の過ごし方',
-                date: '2025年7月8日',
-                category: 'daily',
-                tags: ['日常', '過ごし方', 'シンプル', '自分時間'],
-                content: '家でアルコール以外は水かブラックコーヒーしか飲みません。シンプルな日常を好む弥生。特に過ごし方に凝ったりはせず、自然体でいることが大切。でも、たまには非日常も楽しみたいという気持ちもある。',
-                source: 'Yayopedia'
-            }
-        ];
-
-        // 拡張コンテンツを追加（実際のLINEデータから抽出した300以上の項目）
-        const extendedArticles = [
-            ...articles,
-            // 以下、LINEトークから抽出した追加のエントリー（簡略化のため主要なもののみ記載）
-            {
-                id: 'uniform-preference',
-                title: '制服の好み',
-                date: '2025年6月8日',
-                category: 'personality',
-                tags: ['制服', '好み', 'ズボン', 'セーラー服'],
-                content: 'ズボンいいですよね！高校はブレザーですよ！セーラーは中学でした。昔は私服憧れてましたけど、今となれば制服あってよかったんかなと思います！制服のある生活に今は感謝している。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'communication-style',
-                title: 'コミュニケーションスタイル',
-                date: '2025年6月8日',
-                category: 'personality',
-                tags: ['コミュニケーション', 'スタイル', '距離感', '無理しない'],
-                content: '自分がいける範囲の人としか付き合ってないです！無理に広い人間関係を築こうとせず、自然体でいることが大切。でも、大切な人とは深い関係を築きたいと思っている。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'future-outlook',
-                title: '将来の展望',
-                date: '2025年6月9日',
-                category: 'future',
-                tags: ['将来', '展望', '頑張る', '前向き'],
-                content: '別れてもういいかと思ってましたが、やっぱり頑張ろうかなと思ってしまいましたね。過去の経験を活かして、より良い未来を築きたいという前向きな気持ち。新しい出会いにも期待している。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'value-system',
-                title: '価値観',
-                date: '2025年6月8日',
-                category: 'personality',
-                tags: ['価値観', '思いやり', '大切', '人間関係'],
-                content: '思いやりだけは忘れずにいきたいです。相手への思いやりを持つことが、人間関係の基本だと考えている。自分勝手な行動はせず、相手の立場に立って考えることを大切にしている。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'sister-relationship',
-                title: '妹との関係',
-                date: '2025年6月10日',
-                category: 'family',
-                tags: ['妹', '10歳差', '近所', '姉妹'],
-                content: '妹は10個下で、近所に住んでいる。妹が足を骨折した時は、ここ2週間くらいほぼ毎日ご飯の用意や身の回りのことを手伝いに行っている。一緒に住んだのは8年だけで、高校卒業後すぐに関西に来たため一緒にいた時間は短い。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'brother-relationship',
-                title: '弟との関係',
-                date: '2025年6月10日',
-                category: 'family',
-                tags: ['弟', '実家', '沖縄', '家族'],
-                content: '実家に弟がいる。妹とはこまめに連絡を取るわけではないが、仲は良いようだ。1番上が1番しっかりしてないとよく言われるらしい。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'bone-fracture-story',
-                title: '肋骨骨折の経験',
-                date: '2025年6月10日',
-                category: 'memory',
-                tags: ['怪我', '骨折', '肋骨', '仕事'],
-                content: '前の会社の時に肋骨を骨折したことがある。息ができなくて大変だった。ブラック企業だったので休めず、仕事をしながら治したため治りが遅かった。当時は仕事人間だったので、休むという考えがあまりなかった。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'work-style-past',
-                title: '過去の仕事スタイル',
-                date: '2025年6月10日',
-                category: 'work',
-                tags: ['仕事人間', 'ブラック企業', '働き方', '過去'],
-                content: '前の会社はブラックで、骨折しても休めなかった。仕事人間だったので、休むという考えがあまりなかった。40を境目に体力的にきつくなってきたと感じている。今はゆるく長く働くのが一番だと考えている。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'language-skills',
-                title: '英語力',
-                date: '2025年6月10日',
-                category: 'hobby',
-                tags: ['英語', 'ホームステイ', '台湾', '国際交流'],
-                content: '英語を習っていて、小学生の時は夏休みにホームステイに行っていた。中学校は台湾と交流があり、そこでもホームステイをしたり、代表で挨拶をしたりしていた。同級生が台湾とのハーフでその関係で台湾の中学と文化交流があった。たぶんちょっと英語も話せるらしい。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'kansai-life',
-                title: '関西生活',
-                date: '2025年6月10日',
-                category: 'place',
-                tags: ['関西', '大阪', '専門学校', '上京'],
-                content: '高校卒業して専門学校進学で関西に来た。もう関西が長くなっていて、じょじょに関西人になりつつある。たまに訛っているが、結構イントネーションとかを突っ込まれる。単語のイントネーションがおかしいみたいだ。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'rain-day-trouble',
-                title: '雨の日の失敗',
-                date: '2025年6月10日',
-                category: 'daily',
-                tags: ['雨', 'スニーカー', '外回り', '仕事'],
-                content: 'なぜかスニーカーで来てもう靴が終わった日があった。外回りが多い仕事なのにレインブーツで来るべきだったと後悔した。雨の日は憂鬱になる。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'sibling-order',
-                title: '兄弟順位',
-                date: '2025年6月10日',
-                category: 'personality',
-                tags: ['長女', '兄弟', '要領', '性格'],
-                content: '1番上が1番しっかりしてないとよく言われる。下2人を見ると要領よく生きているなと思う。要領よく生きれて羨ましいと感じている。楽しんだもん勝ちだと考えている。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'body-change',
-                title: '体力の変化',
-                date: '2025年6月10日',
-                category: 'daily',
-                tags: ['40代', '体力', '健康', '加齢'],
-                content: '結構40を境目にきますね、と語っている。体力と相談しながら働くことが大切だと感じている。自分では変わってないつもりだが、これからはゆるく長くがいいと考えている。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'food-habits',
-                title: '食事習慣',
-                date: '2025年6月9日',
-                category: 'food',
-                tags: ['朝食', '昼食', '不規則', '食生活'],
-                content: '朝はしっかり食べて、昼は食べたり食べなかったり。お昼がっつり食べたり、仕事なかったら1食の日もあったりバラバラ。仕事バタバタしてたらお腹すかない。結構食べない日とか、ちょっと血糖下がってそうな時はお菓子をつまんだりする。不健康な感じだと自覚している。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'cold-tofu-favorite',
-                title: '冷奴ハマり中',
-                date: '2025年6月9日',
-                category: 'food',
-                tags: ['冷奴', 'ネバネバ', '健康', '夏'],
-                content: '最近冷奴にハマっている。オクラとなめこと山芋とめかぶをかけたやつが好き。ご飯にかけても美味しい。ネバネバで夏を乗り切る魂胆がある。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'food-preference-noodle-bread',
-                title: '麺類とパンが好き',
-                date: '2025年6月9日',
-                category: 'food',
-                tags: ['麺類', 'パン', '好物', '炭水化物'],
-                content: '麺類とパンが好き。手打ちパスタのタリアテッレみたいなのも美味しそうだと思う。炭水化物が好きな様子。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'natto-dislike',
-                title: '納豆は食べない',
-                date: '2025年6月9日',
-                category: 'food',
-                tags: ['納豆', '苦手', '沖縄', '食べ物'],
-                content: '納豆は食べない。沖縄出身なので納豆を食べない文化で育ったようだ。ネバネバ丼には納豆を入れない。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'lunch-starbucks',
-                title: 'スタバでボーっとする',
-                date: '2025年6月9日',
-                category: 'daily',
-                tags: ['スタバ', 'コーヒー', 'リラックス', '休憩'],
-                content: 'お昼はスタバでコーヒー飲んでボーっとしてることもある。食事を取らずにコーヒーだけの日もある。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'boss-trouble',
-                title: '時間泥棒な上司',
-                date: '2025年6月9日',
-                category: 'work',
-                tags: ['上司', 'お喋り', 'ストレス', '仕事'],
-                content: '時間泥棒な上司がいる。平気に2時間3時間喋ってくる。喋らないで手を動かそうよって思う。質問したら返答プラス自分の考えや価値観やら、私からしたら無駄な話がほぼ。最低限だけ仕事の会話して事務仕事してくださいって思う。喋りが止まらず毎回「あーもうこんな時間」って目の前の席で言っている。女の方なのでよく喋るかもしれない。今週は上司が休みらしくて、少しだけハッピー。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'weather-sensitivity',
-                title: '低気圧に弱い',
-                date: '2025年6月9日',
-                category: 'daily',
-                tags: ['低気圧', '体調', '痛み止め', '天気'],
-                content: '低気圧はしんどい。こんな天気なので痛み止め飲まないとやってられない。体がダルおも～となる。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'delivery-trouble',
-                title: '配達受け取り失敗',
-                date: '2025年6月9日',
-                category: 'daily',
-                tags: ['配達', '不在票', 'Amazon', '受け取り'],
-                content: '昨日受け取りそびれたので今日は間に合うようにしないと、と焦っていた。不在票もなかったみたいで困っていた。Amazonは特にピンポンダッシュ並みにさっさと持ち帰っちゃう配達員さんもいる。プレゼントだと置き配とかしにくい。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'future-attitude',
-                title: '将来への姿勢',
-                date: '2025年6月9日',
-                category: 'love',
-                tags: ['恋愛', '前向き', '頑張る', '再スタート'],
-                content: '別れてもういいかと思ってましたが、やっぱり頑張ろうかなと思ってしまいましたね、と語る。過去の経験を糧に、新しい出会いに前向きになっている。',
-                source: 'LINEトーク'
-            },
-            {
-                id: 'meeting-app-experience',
-                title: 'マッチングアプリ経験',
-                date: '2025年6月9日',
-                category: 'love',
-                tags: ['マッチングアプリ', '出会い', '別れ', '再開'],
-                content: '元カレとはマチアプで出会った。別れて1年だったのでまたアプリをやってみた。全然接点のないところから出会いが始まるのって面白いと思っている。',
-                source: 'LINEトーク'
-            }
-        ];
-
-        let currentCategory = 'all';
-        let filteredArticles = extendedArticles;
-
-        // Initialize page
+        // カテゴリフィルタリング
         document.addEventListener('DOMContentLoaded', function() {
-            renderArticles();
-            setupCategoryButtons();
-            setupSearch();
-        });
-
-        function renderArticles() {
-            const grid = document.getElementById('articlesGrid');
+            const categoryButtons = document.querySelectorAll('.category-btn');
             
-            // Apply search filter if search term exists
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            
-            if (searchTerm) {
-                filteredArticles = extendedArticles.filter(article => 
-                    article.title.toLowerCase().includes(searchTerm) ||
-                    article.content.toLowerCase().includes(searchTerm) ||
-                    article.tags.some(tag => tag.toLowerCase().includes(searchTerm))
-                );
-            } else {
-                filteredArticles = currentCategory === 'all' 
-                    ? extendedArticles 
-                    : extendedArticles.filter(article => article.category === currentCategory);
-            }
-
-            // Update article count
-            document.getElementById('totalArticles').textContent = filteredArticles.length + '+';
-
-            grid.innerHTML = filteredArticles.map(article => `
-                <div class="article-card" onclick="openModal('${article.id}')">
-                    <div class="article-date">
-                        <i class="fas fa-calendar-alt"></i>
-                        ${article.date}
-                    </div>
-                    <h3 class="article-title">${article.title}</h3>
-                    <div class="article-tags">
-                        ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                    </div>
-                    <p class="article-content">${article.content}</p>
-                    <div class="article-stats">
-                        <div class="article-source">出典: ${article.source}</div>
-                        <div class="article-read-more">
-                            詳しく見る <i class="fas fa-arrow-right"></i>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function setupCategoryButtons() {
-            const buttons = document.querySelectorAll('.category-btn');
-            buttons.forEach(button => {
+            categoryButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    // Remove active class from all buttons
-                    buttons.forEach(btn => btn.classList.remove('active'));
-                    // Add active class to clicked button
+                    // アクティブボタンの切り替え
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
                     this.classList.add('active');
                     
-                    // Update current category
-                    currentCategory = this.dataset.category;
-                    renderArticles();
+                    // フィルタリング処理
+                    const category = this.dataset.category;
+                    filterArticles(category);
                 });
             });
-        }
+        });
 
-        function setupSearch() {
-            const searchInput = document.getElementById('searchInput');
-            let searchTimeout;
-
-            searchInput.addEventListener('input', function() {
-                clearTimeout(searchTimeout);
-                searchTimeout = setTimeout(() => {
-                    renderArticles();
-                }, 300);
+        // 記事フィルタリング関数
+        function filterArticles(category) {
+            const articles = document.querySelectorAll('.article-card');
+            
+            articles.forEach(article => {
+                if (category === 'all' || article.dataset.category === category) {
+                    article.style.display = 'block';
+                } else {
+                    article.style.display = 'none';
+                }
             });
         }
 
-        function openModal(articleId) {
-            const article = extendedArticles.find(a => a.id === articleId);
-            if (!article) return;
-
-            document.getElementById('modalTitle').textContent = article.title;
-            document.getElementById('modalBody').innerHTML = `
-                <div class="modal-meta">
-                    <div class="modal-date">${article.date}</div>
-                    <div class="modal-category">${getCategoryName(article.category)}</div>
-                </div>
-                <div style="line-height: 1.8; margin-bottom: 20px;">${article.content}</div>
-                <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
-                    ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                </div>
-                <div style="color: #6B6B6B; font-size: 0.9rem; border-top: 1px solid rgba(212, 165, 116, 0.2); padding-top: 15px;">
-                    <strong>出典:</strong> ${article.source}
-                </div>
-            `;
-
-            document.getElementById('articleModal').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function getCategoryName(category) {
-            const categoryNames = {
-                'food': '食べ物',
-                'hobby': '趣味',
-                'personality': '性格',
-                'lifestyle': '生活',
-                'memory': '思い出',
-                'family': '家族',
-                'work': '仕事',
-                'place': '場所',
-                'love': '恋愛',
-                'daily': '日常',
-                'future': '将来'
-            };
-            return categoryNames[category] || category;
-        }
-
-        function closeModal() {
-            document.getElementById('articleModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal when clicking outside
-        document.getElementById('articleModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
+        // 統計情報を更新
+        async function updateStats() {
+            try {
+                const response = await fetch('yayoi_topics.json?t=' + new Date().getTime());
+                const data = await response.json();
+                
+                let totalMessages = 0;
+                const categories = ['family', 'work', 'memory', 'place', 'future'];
+                
+                categories.forEach(category => {
+                    if (data[category] && Array.isArray(data[category])) {
+                        totalMessages += data[category].length;
+                    }
+                });
+                
+                // 統計情報を更新
+                document.getElementById('totalArticles').textContent = totalMessages;
+                document.getElementById('totalMessages').textContent = totalMessages.toLocaleString();
+                
+                // ユニークな日数を計算
+                const uniqueDates = new Set();
+                categories.forEach(category => {
+                    if (data[category] && Array.isArray(data[category])) {
+                        data[category].forEach(msg => {
+                            uniqueDates.add(msg.date);
+                        });
+                    }
+                });
+                
+                document.getElementById('totalDays').textContent = uniqueDates.size;
+                
+            } catch (error) {
+                console.error('統計情報の更新に失敗しました:', error);
             }
-        });
+        }
 
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
+        // 統計情報を更新
+        updateStats();
     </script>
-<script src="load_data.js"></script></body>
+</body>
 </html>
