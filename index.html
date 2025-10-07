@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>弥生ポータル - Yayopedia & 検定</title>
+    <link href="https://fonts.googleapis.com/css2?family=Coda&family=Hedvig+Letters+Sans&family=Jersey+15&family=Jersey+20+Charted&family=Liter&family=Luckiest+Guy&family=Oranienbaum&family=Press+Start+2P&family=Quattrocento+Sans&family=Sorts+Mill+Goudy&family=Unna&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            color: #1a1a1a;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(248, 246, 240, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 165, 116, 0.2);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Sorts Mill Goudy', serif;
+            font-size: 1.8rem;
+            color: #2C2C2C;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2C2C2C;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #D4A574;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #D4A574;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, #F8F6F0 0%, #F5F3ED 50%, #F0EDE5 100%);
+        }
+
+        .hero-title {
+            font-family: 'Sorts Mill Goudy', serif;
+            font-size: 3.5rem;
+            color: #2C2C2C;
+            margin-bottom: 20px;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #6B6B6B;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: #5A5A5A;
+            max-width: 600px;
+            margin: 0 auto 50px;
+            line-height: 1.8;
+        }
+
+
+
+        /* Main Content */
+        .main-content {
+            padding: 80px 0;
+        }
+
+        .section {
+            margin-bottom: 100px;
+        }
+
+        .section-title {
+            font-family: 'Sorts Mill Goudy', serif;
+            font-size: 2.5rem;
+            color: #2C2C2C;
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: 400;
+        }
+
+        /* Feature Cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: rgba(212, 165, 116, 0.4);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, #D4A574, #C19660);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #D4A574;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-family: 'Sorts Mill Goudy', serif;
+            font-size: 1.5rem;
+            color: #2C2C2C;
+            margin-bottom: 15px;
+        }
+
+        .feature-description {
+            color: #6B6B6B;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .feature-link {
+            color: #D4A574;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s ease;
+        }
+
+        .feature-link:hover {
+            gap: 12px;
+        }
+
+        /* Quiz Preview */
+        .quiz-preview {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            border: 1px solid rgba(212, 165, 116, 0.2);
+        }
+
+        .quiz-title {
+            font-family: 'Sorts Mill Goudy', serif;
+            font-size: 2rem;
+            color: #2C2C2C;
+            margin-bottom: 20px;
+        }
+
+        .quiz-description {
+            color: #6B6B6B;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .quiz-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Sorts Mill Goudy', serif;
+            font-size: 2.5rem;
+            color: #D4A574;
+            font-weight: 600;
+        }
+
+        .stat-label {
+            color: #6B6B6B;
+            font-size: 0.9rem;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #D4A574, #C19660);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(212, 165, 116, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(212, 165, 116, 0.4);
+        }
+
+        /* About Section */
+        .about-section {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            margin-bottom: 60px;
+        }
+
+        .about-title {
+            font-family: 'Sorts Mill Goudy', serif;
+            font-size: 2rem;
+            color: #2C2C2C;
+            margin-bottom: 30px;
+        }
+
+        .about-content {
+            color: #6B6B6B;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        .footer {
+            background: #F0EDE5;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(212, 165, 116, 0.2);
+        }
+
+        .footer-text {
+            color: #6B6B6B;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .quiz-stats {
+                gap: 20px;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .about-section {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="logo">弥生ポータル</a>
+                <ul class="nav-links">
+                    <li><a href="yayopedia.html">Yayopedia</a></li>
+                    <li><a href="quiz.html">検定</a></li>
+                    <li><a href="#about" onclick="scrollToAbout()">About</a></li>
+                    <li><a href="#" onclick="scrollToTop()">ホーム</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">弥生の世界へようこそ</h1>
+            <p class="hero-subtitle">Yayopedia & やよい検定</p>
+            <p class="hero-description">
+                弥生に関するすべてを記録し、検定で楽しむポータルサイト。<br>
+                知識を深めて、やよたんマスターを目指そう。
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Feature Section -->
+            <section class="section fade-in">
+                <h2 class="section-title">コンテンツ</h2>
+                <div class="feature-grid">
+                    <div class="feature-card" onclick="window.location.href='yayopedia.html'">
+                        <div class="feature-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3 class="feature-title">Yayopedia</h3>
+                        <p class="feature-description">
+                            弥生に関するすべての知識を収録した百科事典。<br>
+                            好きなもの、性格、思い出など、弥生の魅力を余すところなく記録。
+                        </p>
+                        <a href="yayopedia.html" class="feature-link">
+                            詳しく見る <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="feature-card" onclick="window.location.href='quiz.html'">
+                        <div class="feature-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3 class="feature-title">やよい検定</h3>
+                        <p class="feature-description">
+                            3つの難易度で構成された検定システム。<br>
+                            基礎から応用まで、弥生のことをどこまで知っているか試してみよう。
+                        </p>
+                        <a href="quiz.html" class="feature-link">
+                            チャレンジする <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quiz Preview -->
+            <section class="section fade-in">
+                <div class="quiz-preview">
+                    <h2 class="quiz-title">やよい検定に挑戦</h2>
+                    <p class="quiz-description">
+                        弥生のことをどれだけ知っているか、検定で試してみよう！<br>
+                        3つの難易度から選べて、クリアしたら認定証をゲット。
+                    </p>
+                    
+                    <div class="quiz-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">300</div>
+                            <div class="stat-label">総問題数</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">難易度</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">∞</div>
+                            <div class="stat-label">楽しさ</div>
+                        </div>
+                    </div>
+                    
+                    <a href="quiz.html" class="cta-button">
+                        いますぐ挑戦する
+                    </a>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section class="section fade-in" id="about">
+                <div class="about-section">
+                    <h2 class="about-title">About 弥生ポータル</h2>
+                    <div class="about-content">
+                        <p>
+                            このサイトは、弥生さんの魅力を記録し、共有するためのポータルサイトです。<br>
+                            LINEでの会話や日常の思い出から、弥生さんの人柄や好み、価値観などを収集し、<br>
+                            クイズ形式で楽しめるコンテンツとして提供しています。
+                        </p>
+                        <p>
+                            Yayopediaでは70以上のエントリーで弥生さんのことを詳しく紹介。<br>
+                            検定では3段階の難易度で、弥生マスターを目指せます。
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                © 2025 弥生ポータル - Yayopedia & やよい検定
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll functions
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function scrollToAbout() {
+            document.getElementById('about').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // Add click effect to feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'translateY(-2px) scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-5px) scale(1)';
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>

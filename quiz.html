@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>やよい検定 - 弥生マスターへの道</title>
+    <link href="https://fonts.googleapis.com/css2?family=Coda&family=Hedvig+Letters+Sans&family=Jersey+15&family=Jersey+20+Charted&family=Liter&family=Luckiest+Guy&family=Oranienbaum&family=Press+Start+2P&family=Quattrocento+Sans&family=Sorts+Mill+Goudy&family=Unna&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oranienbaum', 'Liter', sans-serif;
+            line-height: 1.7;
+            color: #2C2C2C;
+            background: linear-gradient(135deg, #F8F6F0 0%, #F5F3ED 100%);
+            min-height: 100vh;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(248, 246, 240, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 165, 116, 0.2);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Sorts Mill Goudy', serif;
+            font-size: 1.8rem;
+            color: #2C2C2C;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2C2C2C;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #D4A574;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #D4A574;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 120px 0 80px;
+        }
+
+        .page-title {
+            font-family: 'Sorts Mill Goudy', serif;
+            font-size: 3rem;
+            color: #2C2C2C;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #6B6B6B;
+            font-size: 1.2rem;
+            margin-bottom: 60px;
+        }
+
+        /* Quiz Mode Selection */
+        .mode-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .mode-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .mode-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: rgba(212, 165, 116, 0.4);
+        }
+
+        .mode-icon {
+            font-size: 3rem;
+            color: #D4A574;
+            margin-bottom: 20px;
+        }
+
+        .mode-title {
+            font-family: 'Sorts Mill Goudy', serif;
+            font-size: 1.8rem;
+            color: #2C2C2C;
+            margin-bottom: 15px;
+        }
+
+        .mode-description {
+            color: #6B6B6B;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .mode-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Sorts Mill Goudy', serif;
+            font-size: 1.5rem;
+            color: #D4A574;
+            font-weight: 600;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #6B6B6B;
+        }
+
+        .start-button {
+            background: linear-gradient(135deg, #D4A574, #C19660);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .start-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(212, 165, 116, 0.3);
+        }
+
+        /* Quiz Screen */
+        .quiz-screen {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quiz-header {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 1px solid rgba(212, 165, 116, 0.2);
+        }
+
+        .quiz-progress {
+            width: 100%;
+            height: 8px;
+            background: rgba(212, 165, 116, 0.2);
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .quiz-progress-bar {
+            height: 100%;
+            background: linear-gradient(135deg, #D4A574, #C19660);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .question-counter {
+            color: #6B6B6B;
+            font-size: 0.9rem;
+        }
+
+        .quiz-score {
+            color: #D4A574;
+            font-weight: 600;
+        }
+
+        .question-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(212, 165, 116, 0.2);
+        }
+
+        .question-text {
+            font-family: 'Sorts Mill Goudy', serif;
+            font-size: 1.4rem;
+            color: #2C2C2C;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option {
+            background: rgba(248, 246, 240, 0.8);
+            border: 2px solid rgba(212, 165, 116, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 165, 116, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .option:hover::before {
+            left: 100%;
+        }
+
+        .option:hover {
+            border-color: #D4A574;
+            background: rgba(212, 165, 116, 0.1);
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            border-color: #D4A574;
+            background: rgba(212, 165, 116, 0.2);
+            transform: translateX(5px);
+        }
+
+        .option.correct {
+            border-color: #4CAF50;
+            background: rgba(76, 175, 80, 0.1);
+            animation: correctPulse 0.6s ease;
+        }
+
+        .option.incorrect {
+            border-color: #f44336;
+            background: rgba(244, 67, 54, 0.1);
+            animation: incorrectShake 0.6s ease;
+        }
+
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1) translateX(5px); }
+            50% { transform: scale(1.02) translateX(5px); }
+        }
+
+        @keyframes incorrectShake {
+            0%, 100% { transform: translateX(5px); }
+            25% { transform: translateX(0px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .quiz-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: nowrap;
+        }
+
+        .control-button {
+            background: linear-gradient(135deg, #D4A574, #C19660);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            max-width: 150px;
+            font-size: 1rem;
+        }
+
+        .control-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(212, 165, 116, 0.3);
+        }
+
+        .control-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .control-button.secondary {
+            background: rgba(107, 107, 107, 0.8);
+        }
+
+        .control-button.secondary:hover {
+            background: rgba(107, 107, 107, 1);
+        }
+
+        /* Explanation Card */
+        .explanation-card {
+            background: rgba(212, 165, 116, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            border: 1px solid rgba(212, 165, 116, 0.3);
+            display: none;
+        }
+
+        .explanation-title {
+            font-family: 'Sorts Mill Goudy', serif;
+            font-size: 1.2rem;
+            color: #D4A574;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .explanation-content {
+            color: #2C2C2C;
+            line-height: 1.7;
+        }
+
+        /* Result Screen */
+        .result-screen {
+            display: none;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(212, 165, 116, 0.2);
+        }
+
+        .result-title {
+            font-family: 'Sorts Mill Goudy', serif;
+            font-size: 2.5rem;
+            color: #2C2C2C;
+            margin-bottom: 20px;
+        }
+
+        .result-score {
+            font-family: 'Sorts Mill Goudy', serif;
+            font-size: 4rem;
+            color: #D4A574;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .result-level {
+            font-size: 1.3rem;
+            color: #D4A574;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .result-message {
+            color: #6B6B6B;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .result-details {
+            background: rgba(212, 165, 116, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .result-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .result-stat {
+            text-align: center;
+        }
+
+        .result-stat-number {
+            font-family: 'Sorts Mill Goudy', serif;
+            font-size: 2rem;
+            color: #D4A574;
+            font-weight: 600;
+        }
+
+        .result-stat-label {
+            color: #6B6B6B;
+            font-size: 0.9rem;
+        }
+
+        .result-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        .footer {
+            background: #F0EDE5;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(212, 165, 116, 0.2);
+        }
+
+        .footer-text {
+            color: #6B6B6B;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+                margin-bottom: 15px;
+            }
+            
+            .page-subtitle {
+                font-size: 1rem;
+                margin-bottom: 40px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mode-selection {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin-bottom: 40px;
+            }
+            
+            .mode-card {
+                padding: 30px 20px;
+            }
+            
+            .mode-icon {
+                font-size: 2.5rem;
+            }
+            
+            .mode-title {
+                font-size: 1.5rem;
+            }
+            
+            .mode-stats {
+                gap: 15px;
+            }
+            
+            .question-card {
+                padding: 25px 20px;
+                margin-bottom: 20px;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+                margin-bottom: 25px;
+            }
+            
+            .option {
+                padding: 15px;
+                font-size: 1rem;
+            }
+            
+            .quiz-controls {
+                flex-direction: row;
+                gap: 15px;
+                margin-top: 25px;
+            }
+            
+            .control-button {
+                padding: 12px 20px;
+                font-size: 0.95rem;
+                max-width: none;
+                min-height: 48px;
+            }
+            
+            .quiz-header {
+                padding: 20px;
+            }
+            
+            .quiz-info {
+                flex-direction: column;
+                text-align: center;
+                gap: 5px;
+            }
+            
+            .result-card {
+                padding: 30px 20px;
+            }
+            
+            .result-score {
+                font-size: 3rem;
+            }
+            
+            .result-level {
+                font-size: 1.1rem;
+            }
+            
+            .result-actions {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .result-actions .start-button {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .mode-card {
+                padding: 25px 15px;
+            }
+            
+            .question-card {
+                padding: 20px 15px;
+            }
+            
+            .quiz-controls {
+                gap: 10px;
+            }
+            
+            .control-button {
+                padding: 10px 15px;
+                min-height: 44px;
+            }
+        }
+
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .option:hover {
+                transform: none;
+            }
+            
+            .option.selected {
+                transform: none;
+            }
+            
+            .start-button:hover {
+                transform: none;
+            }
+            
+            .control-button:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="logo">弥生ポータル</a>
+                <ul class="nav-links">
+                    <li><a href="yayopedia.html">Yayopedia</a></li>
+                    <li><a href="quiz.html" class="active">検定</a></li>
+                    <li><a href="index.html">ホーム</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <h1 class="page-title">やよい検定</h1>
+            <p class="page-subtitle">弥生マスターへの道</p>
+
+            <!-- Mode Selection -->
+            <div class="mode-selection" id="modeSelection">
+                <div class="mode-card" onclick="startQuiz('normal')">
+                    <div class="mode-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3 class="mode-title">やよい検定</h3>
+                    <p class="mode-description">基礎から学ぶ初心者向け検定。弥生の基本情報をマスターしよう。</p>
+                    <div class="mode-stats">
+                        <div class="stat">
+                            <div class="stat-number">100</div>
+                            <div class="stat-label">問題数</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">初級</div>
+                            <div class="stat-label">難易度</div>
+                        </div>
+                    </div>
+                    <button class="start-button">チャレンジする</button>
+                </div>
+
+                <div class="mode-card" onclick="startQuiz('advanced')">
+                    <div class="mode-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 class="mode-title">スーパーやよい検定</h3>
+                    <p class="mode-description">本気で弥生を知りたい人向け。より深い知識が必要です。</p>
+                    <div class="mode-stats">
+                        <div class="stat">
+                            <div class="stat-number">100</div>
+                            <div class="stat-label">問題数</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">中級</div>
+                            <div class="stat-label">難易度</div>
+                        </div>
+                    </div>
+                    <button class="start-button">チャレンジする</button>
+                </div>
+
+                <div class="mode-card" onclick="startQuiz('extreme')">
+                    <div class="mode-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3 class="mode-title">真・やよい検定（極）</h3>
+                    <p class="mode-description">究極の弥生マスターだけがクリアできる最難関検定。</p>
+                    <div class="mode-stats">
+                        <div class="stat">
+                            <div class="stat-number">100</div>
+                            <div class="stat-label">問題数</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">上級</div>
+                            <div class="stat-label">難易度</div>
+                        </div>
+                    </div>
+                    <button class="start-button">チャレンジする</button>
+                </div>
+            </div>
+
+            <!-- Quiz Screen -->
+            <div class="quiz-screen" id="quizScreen">
+                <div class="quiz-header">
+                    <div class="quiz-progress">
+                        <div class="quiz-progress-bar" id="progressBar"></div>
+                    </div>
+                    <div class="quiz-info">
+                        <div class="question-counter" id="questionCounter">問題 1 / 100</div>
+                        <div class="quiz-score" id="quizScore">スコア: 0</div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text" id="questionText"></div>
+                    <div class="options" id="questionOptions"></div>
+                    <div class="explanation-card" id="explanationCard">
+                        <div class="explanation-title">
+                            <i class="fas fa-lightbulb"></i>
+                            解説
+                        </div>
+                        <div class="explanation-content" id="explanationContent"></div>
+                    </div>
+                </div>
+
+                <div class="quiz-controls">
+                    <button class="control-button secondary" id="prevButton" onclick="previousQuestion()" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                        前へ
+                    </button>
+                    <button class="control-button" id="nextButton" onclick="nextQuestion()" disabled>
+                        <span id="nextButtonText">次へ</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Result Screen -->
+            <div class="result-screen" id="resultScreen">
+                <div class="result-card">
+                    <h2 class="result-title">検定結果</h2>
+                    <div class="result-score" id="finalScore">0</div>
+                    <div class="result-level" id="resultLevel">やよいマスター</div>
+                    <div class="result-message" id="resultMessage"></div>
+                    
+                    <div class="result-details">
+                        <h3 style="color: #2C2C2C; margin-bottom: 15px;">詳細結果</h3>
+                        <div class="result-stats">
+                            <div class="result-stat">
+                                <div class="result-stat-number" id="correctAnswers">0</div>
+                                <div class="result-stat-label">正解数</div>
+                            </div>
+                            <div class="result-stat">
+                                <div class="result-stat-number" id="totalQuestions">0</div>
+                                <div class="result-stat-label">総問題数</div>
+                            </div>
+                            <div class="result-stat">
+                                <div class="result-stat-number" id="accuracyRate">0%</div>
+                                <div class="result-stat-label">正答率</div>
+                            </div>
+                            <div class="result-stat">
+                                <div class="result-stat-number" id="timeSpent">0分</div>
+                                <div class="result-stat-label">解答時間</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="result-actions">
+                        <button class="start-button" onclick="restartQuiz()">
+                            <i class="fas fa-redo"></i>
+                            もう一度挑戦
+                        </button>
+                        <a href="yayopedia.html" class="start-button">
+                            <i class="fas fa-book"></i>
+                            Yayopediaで勉強
+                        </a>
+                        <a href="index.html" class="start-button">
+                            <i class="fas fa-home"></i>
+                            ホームに戻る
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                © 2025 弥生ポータル - やよい検定
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Extended quiz data with 300 questions total (100 per level)
+        const quizData = {
+            normal: [
+                // 100 questions for normal level
+                {
+                    question: "弥生が好きなカップラーメンは？",
+                    options: ["レッドシーフードヌードル", "カップスター", "どん兵衛", "ラ王"],
+                    correct: 0,
+                    explanation: "夏になると買い溜めするカップラーメンで、ここ3、4年でいちばん好きなカップラーメンらしい。"
+                },
+                {
+                    question: "弥生が好きな飲み物は？",
+                    options: ["緑茶", "コーラ", "ブラックコーヒー", "オレンジジュース"],
+                    correct: 2,
+                    explanation: "家でアルコール以外は水かブラックコーヒーしか飲まないそうだ。"
+                },
+                {
+                    question: "弥生の地元はどこ？",
+                    options: ["大阪", "沖縄", "東京", "京都"],
+                    correct: 1,
+                    explanation: "地元は沖縄で、関西の方が少し長くなってきたそうだ。"
+                },
+                {
+                    question: "弥生が好きなキャラクターは？",
+                    options: ["くまモン", "ミッフィー", "リラックマ", "すみっコぐらし"],
+                    correct: 1,
+                    explanation: "ミッフィーが好きで、LINEのアイコンもミッフィーにしている。"
+                },
+                {
+                    question: "弥生が目指しているライフスタイルは？",
+                    options: ["セレブ生活", "干物女", "キャリアウーマン", "主婦"],
+                    correct: 1,
+                    explanation: "干物女を目指していて、新聞紙で寝るのが夢らしい。"
+                },
+                {
+                    question: "弥生が好きなドラマは？",
+                    options: ["逃げるは恥だが役に立つ", "ホタルノヒカリ", "家政婦のミタ", "リッチマン、プアウーマン"],
+                    correct: 1,
+                    explanation: "2007年に放送された『ホタルノヒカリ』が好きな古いドラマ。"
+                },
+                {
+                    question: "弥生が最近欲しいものは？",
+                    options: ["新しい携帯", "万華鏡", "車", "家"],
+                    correct: 1,
+                    explanation: "最近万華鏡が欲しいと言っていた。"
+                },
+                {
+                    question: "弥生が集めているものは？",
+                    options: ["切手", "コイン", "かわいい缶", "ぬいぐるみ"],
+                    correct: 2,
+                    explanation: "かわいい缶を集めるのが好きで、中には思い出の品が入っている。"
+                },
+                {
+                    question: "弥生が住みたいと思っている家は？",
+                    options: ["マンション", "一戸建て", "縁側のある家", "高級アパート"],
+                    correct: 2,
+                    explanation: "縁側のある家に住みたいと憧れている。"
+                },
+                {
+                    question: "弥生が好きな麺類は？",
+                    options: ["ラーメン", "うどん", "そば", "パスタ"],
+                    correct: 0,
+                    explanation: "レッドシーフードヌードルが好きで、夏になると買い溜めする。"
+                },
+                {
+                    question: "弥生が最近ハマっている冷奴の具材は？",
+                    options: ["オクラとなめこと山芋とめかぶ", "納豆とネギ", "キムチとチーズ", "シラスと生姜"],
+                    correct: 0,
+                    explanation: "オクラとなめこと山芋とめかぶをかけた冷奴にハマっている。ネバネバで夏を乗り切る魂胆。"
+                },
+                {
+                    question: "弥生は納豆を食べる？",
+                    options: ["毎日食べる", "食べない", "たまに食べる", "嫌いだけど無理して食べる"],
+                    correct: 1,
+                    explanation: "沖縄出身なので納豆を食べない文化で育った。"
+                },
+                {
+                    question: "弥生の妹は何歳下？",
+                    options: ["5歳", "10歳", "15歳", "20歳"],
+                    correct: 1,
+                    explanation: "妹は10個下で、近所に住んでいる。"
+                },
+                {
+                    question: "弥生が高校卒業後すぐにしたことは？",
+                    options: ["就職した", "海外留学した", "専門学校進学で関西に来た", "1年間フリーターをした"],
+                    correct: 2,
+                    explanation: "高校卒業して専門学校進学で関西に来た。"
+                },
+                {
+                    question: "弥生が小学生の時に夏休みにしていたことは？",
+                    options: ["海で遊ぶ", "ホームステイ", "塾に通う", "部活動"],
+                    correct: 1,
+                    explanation: "英語を習っていて、小学生の時は夏休みにホームステイに行っていた。"
+                },
+                {
+                    question: "弥生の中学校が交流していた国は？",
+                    options: ["中国", "韓国", "台湾", "アメリカ"],
+                    correct: 2,
+                    explanation: "中学校は台湾と交流があり、そこでもホームステイをしたり、代表で挨拶をしたりしていた。"
+                },
+                {
+                    question: "弥生が前の会社で骨折した部位は？",
+                    options: ["腕", "足", "肋骨", "手首"],
+                    correct: 2,
+                    explanation: "前の会社の時に肋骨を骨折した。息ができなくて大変だった。"
+                },
+                {
+                    question: "弥生が40を境目に感じたことは？",
+                    options: ["視力が落ちた", "白髪が増えた", "体力的にきつくなってきた", "食欲が減った"],
+                    correct: 2,
+                    explanation: "結構40を境目に体力的にきますね、と語っている。"
+                },
+                {
+                    question: "弥生が時間泥棒だと思っている人は？",
+                    options: ["同僚", "上司", "お客様", "友達"],
+                    correct: 1,
+                    explanation: "時間泥棒な上司が平気に2時間3時間喋ってくる。"
+                },
+                {
+                    question: "弥生の朝食の特徴は？",
+                    options: ["食べない", "軽く食べる", "しっかり食べる", "フルーツだけ"],
+                    correct: 2,
+                    explanation: "朝はしっかり食べて、昼は食べたり食べなかったり。"
+                },
+                {
+                    question: "弥生が低気圧の時に飲むものは？",
+                    options: ["栄養ドリンク", "痛み止め", "コーヒー", "お茶"],
+                    correct: 1,
+                    explanation: "低気圧はしんどい。こんな天気なので痛み止め飲まないとやってられない。"
+                },
+                {
+                    question: "弥生が雨の日にスニーカーで来て後悔した理由は？",
+                    options: ["滑った", "靴が終わった", "忘れ物をした", "遅刻した"],
+                    correct: 1,
+                    explanation: "なぜかスニーカーで来てもう靴が終わった。外回りが多い仕事なのにレインブーツで来るべきだった。"
+                },
+                {
+                    question: "弥生が実家にいる兄弟は？",
+                    options: ["妹", "弟", "兄", "姉"],
+                    correct: 1,
+                    explanation: "実家に弟がいる。"
+                },
+                {
+                    question: "弥生が妹と一緒に住んだ期間は？",
+                    options: ["5年", "8年", "10年", "15年"],
+                    correct: 1,
+                    explanation: "一緒に住んだのは8年だけ。高校卒業後すぐに関西に来たため一緒にいた時間は短い。"
+                }
+            ],
+            advanced: [
+                // 100 questions for advanced level
+                {
+                    question: "弥生が作ってくれた初めての料理は？",
+                    options: ["豚しゃぶとなすのうまいやつ", "麻婆豆腐", "寿司", "カレー"],
+                    correct: 0,
+                    explanation: "豚しゃぶとなすのうまいやつを初めて作ってくれた。ポン酢と大根おろしでさっぱり味。"
+                },
+                {
+                    question: "弥生の高校の制服は？",
+                    options: ["セーラー服", "ブレザー", "チェック柄", "着物"],
+                    correct: 1,
+                    explanation: "高校はブレザーで、中学の時がセーラー服だったそうだ。"
+                },
+                {
+                    question: "弥生がアプリで知り合った元カレと別れてからどのくらい経過？",
+                    options: ["半年", "1年", "1年半", "2年"],
+                    correct: 1,
+                    explanation: "別れて1年ちょっとくらいで、またアプリを使い始めたそうだ。"
+                },
+                {
+                    question: "弥生が前の彼氏と付き合っていた期間は？",
+                    options: ["1年", "1年半", "2年", "3年"],
+                    correct: 1,
+                    explanation: "前の彼氏とは1年半くらい付き合っていたそうだ。"
+                },
+                {
+                    question: "弥生がガチャガチャを見つけると？",
+                    options: ["無視する", "吸い込まれていく", "興味を持たない", "友達に教える"],
+                    correct: 1,
+                    explanation: "ガチャガチャを見つけると吸い込まれていくから、注意が必要らしい。"
+                },
+                {
+                    question: "弥生の声の特徴は？",
+                    options: ["いつも大声", "いつも小声", "小声だけど突然大声", "モノトーン"],
+                    correct: 2,
+                    explanation: "普段小声だけど、何かあった時に突然大声が出るそうだ。"
+                },
+                {
+                    question: "弥生が前の彼氏にキレた理由は？",
+                    options: ["浮気", "お金にルーズ", "暴力", "無関心"],
+                    correct: 1,
+                    explanation: "お金に対して結構ルーズで、我慢していたけどキレてしまったそうだ。"
+                },
+                {
+                    question: "弥生が前の彼氏に対して我慢していた期間は？",
+                    options: ["半年", "1年", "1年半", "2年"],
+                    correct: 2,
+                    explanation: "1年半我慢していた分がきて、ブチギレたそうだ。"
+                },
+                {
+                    question: "弥生が骨折した時、彼氏はどうだった？",
+                    options: ["心配してくれた", "看病してくれた", "心配してくれなかった", "病院に連れて行ってくれた"],
+                    correct: 2,
+                    explanation: "骨折しても心配してくれないような人だったそうだ。"
+                },
+                {
+                    question: "弥生の誕生日に彼氏は？",
+                    options: ["プレゼントをくれた", "祝ってくれた", "何もしなかった", "最悪だった"],
+                    correct: 3,
+                    explanation: "誕生日も最悪だったそうで、その後にブチギレたそうだ。"
+                },
+                {
+                    question: "弥生が妹のお世話にほぼ毎日行っている期間は？",
+                    options: ["1週間", "2週間", "3週間", "1ヶ月"],
+                    correct: 1,
+                    explanation: "妹が足を骨折した時、ここ2週間くらいほぼ毎日ご飯の用意や身の回りのことを手伝いに行っている。"
+                },
+                {
+                    question: "弥生が前の会社で骨折しても休めなかった理由は？",
+                    options: ["お金が必要だった", "ブラック企業だった", "仕事が好きだった", "代わりがいなかった"],
+                    correct: 1,
+                    explanation: "前の会社の時でブラックだったので休めなかった。"
+                },
+                {
+                    question: "弥生が仕事人間だった時の考え方は？",
+                    options: ["休むのが怖い", "休むという考えがあまりなかった", "休むと給料が減る", "休むと評価が下がる"],
+                    correct: 1,
+                    explanation: "仕事人間だったので、休むという考えがあまりなかった。"
+                },
+                {
+                    question: "弥生がこれから大切だと思っている働き方は？",
+                    options: ["バリバリ働く", "ゆるく長く", "短期集中", "副業も含めて"],
+                    correct: 1,
+                    explanation: "これからはゆるく長くがいいですね、と語っている。"
+                },
+                {
+                    question: "弥生が関西に来た年齢は？",
+                    options: ["15歳", "18歳", "20歳", "22歳"],
+                    correct: 1,
+                    explanation: "高校卒業してすぐに専門学校進学で関西に来た。"
+                },
+                {
+                    question: "弥生のイントネーションの特徴は？",
+                    options: ["完璧な標準語", "完璧な関西弁", "たまに沖縄訛り", "東京訛り"],
+                    correct: 2,
+                    explanation: "じょじょに関西人になりつつあるが、たまに訛っている。結構イントネーションとかを突っ込まれる。"
+                },
+                {
+                    question: "弥生が配達で受け取りそびれた時に感じたことは？",
+                    options: ["仕方ない", "不在票もなかった", "また明日でいい", "コンビニ受け取りにすればよかった"],
+                    correct: 1,
+                    explanation: "昨日受け取りそびれたが、不在票もなかったみたいで困っていた。"
+                },
+                {
+                    question: "弥生がお昼にスタバでしていることは？",
+                    options: ["読書", "仕事", "ボーっとする", "友達と話す"],
+                    correct: 2,
+                    explanation: "お昼はスタバでコーヒー飲んでボーっとしていることがある。"
+                },
+                {
+                    question: "弥生が上司について思っていることは？",
+                    options: ["尊敬している", "時間泥棒", "優しい", "厳しい"],
+                    correct: 1,
+                    explanation: "時間泥棒な上司が平気に2時間3時間喋ってくる。"
+                },
+                {
+                    question: "弥生の上司の性別は？",
+                    options: ["男性", "女性", "不明", "複数いる"],
+                    correct: 1,
+                    explanation: "女の方なのでよく喋るかもしれない、と語っている。"
+                },
+                {
+                    question: "弥生が兄弟の中で言われることは？",
+                    options: ["一番優秀", "一番しっかりしてない", "一番美人", "一番面白い"],
+                    correct: 1,
+                    explanation: "1番上が1番しっかりしてないとよく言われる。"
+                },
+                {
+                    question: "弥生が下の兄弟について思うことは？",
+                    options: ["可愛い", "要領よく生きている", "うるさい", "仲が悪い"],
+                    correct: 1,
+                    explanation: "下2人を見ると要領よく生きているなと思う。"
+                }
+            ],
+            extreme: [
+                // 100 questions for extreme level
+                {
+                    question: "弥生がアプレシオで後から追加注文したものは？",
+                    options: ["ビール", "チーズトルティーヤ", "デザート", "サルサソース"],
+                    correct: 1,
+                    explanation: "タコスが少なかったので、後でチーズトルティーヤを追加注文した。"
+                },
+                {
+                    question: "弥生が正倉院を訪れた日のイベントは？",
+                    options: ["お祭り", "ブルーインパルス大阪", "花見", "コンサート"],
+                    correct: 1,
+                    explanation: "この日はブルーインパルス大阪を見に来て、その帰りに正倉院を訪れた。"
+                },
+                {
+                    question: "弥生が好きな豆腐の食べ方は？",
+                    options: ["冷奴", "湯豆腐", "揚げ出し豆腐", "麻婆豆腐"],
+                    correct: 1,
+                    explanation: "地元では茹でたてを買って湯豆腐にしていたそうだ。"
+                },
+                {
+                    question: "弥生が集めている缶の中身は？",
+                    options: ["空っぽ", "お菓子", "思い出の品", "コイン"],
+                    correct: 2,
+                    explanation: "かわいい缶の中には思い出の品が入っているらしい。"
+                },
+                {
+                    question: "弥生がミッフィー展で何をする予定？",
+                    options: ["見るだけ", "グッズを買い漁る", "友達と行く", "何も買わない"],
+                    correct: 1,
+                    explanation: "誕生70周年記念ミッフィー展でグッズを買い漁ると宣言していた。"
+                },
+                {
+                    question: "弥生が干物女になる夢は？",
+                    options: ["ソファで寝る", "新聞紙で寝る", "床で寝る", "外で寝る"],
+                    correct: 1,
+                    explanation: "新聞紙で寝るのが夢らしい。"
+                },
+                {
+                    question: "弥生がホタルノヒカリを好きな理由は？",
+                    options: ["キャストが好き", "干物女のキャラクター", "恋愛ドラマ", "コメディー"],
+                    correct: 1,
+                    explanation: "干物女という新しいキャラクター像が話題になり、日常のだらしなさと恋愛のギャップが面白い。"
+                },
+                {
+                    question: "弥生が縁側でしたいことは？",
+                    options: ["昼寝", "読書", "お茶を飲む", "仕事をする"],
+                    correct: 2,
+                    explanation: "縁側でお茶を飲みながら過ごす時間を憧れている。"
+                },
+                {
+                    question: "弥生がアプリを再開した理由は？",
+                    options: ["暇だったから", "友達に勧められた", "別れて1年経ったから", "新しい出会いを求めて"],
+                    correct: 2,
+                    explanation: "別れて1年だったので、またアプリを使い始めたそうだ。"
+                },
+                {
+                    question: "弥生が人付き合いで苦手なことは？",
+                    options: ["初対面", "大勢の人", "自分がいける範囲の人としか付き合わない", "電話"],
+                    correct: 2,
+                    explanation: "自分がいける範囲の人としか付き合っていないそうだ。"
+                },
+                {
+                    question: "弥生の妹が骨折した部位は？",
+                    options: ["腕", "足", "肋骨", "手"],
+                    correct: 1,
+                    explanation: "妹は足を骨折していて、お風呂とか難儀そうだった。"
+                },
+                {
+                    question: "弥生が肋骨を骨折した時に大変だったことは？",
+                    options: ["歩けない", "息ができない", "寝られない", "食べられない"],
+                    correct: 1,
+                    explanation: "肋骨は息ができなくて大変だった。"
+                },
+                {
+                    question: "弥生が骨折した時に治りが遅かった理由は？",
+                    options: ["薬を飲まなかった", "病院に行かなかった", "仕事をしていた", "運動していた"],
+                    correct: 2,
+                    explanation: "仕事してたので治りが遅かった。"
+                },
+                {
+                    question: "弥生が妹の怪我の時にしていることは？",
+                    options: ["見舞いに行く", "ご飯の用意や身の回りのこと", "電話で励ます", "何もしない"],
+                    correct: 1,
+                    explanation: "妹が足を骨折した時は、ご飯の用意や身の回りのことを手伝いに行っている。"
+                },
+                {
+                    question: "弥生が妹に持って行ったものは？",
+                    options: ["お見舞い", "タクシー代", "食料", "薬"],
+                    correct: 1,
+                    explanation: "妹は明日は仕事に行かないとらしいので、タクシー代とか今から持って行く、と語っている。"
+                },
+                {
+                    question: "弥生が妹とこまめに連絡を取らないのはなぜ？",
+                    options: ["仲が悪いから", "忙しいから", "仲良いけどそういう関係", "喧嘩したから"],
+                    correct: 2,
+                    explanation: "仲良いんかもしれないですが、こまめに連絡とったりしないんですよね、と語っている。"
+                },
+                {
+                    question: "弥生が台湾交流で代表として何をした？",
+                    options: ["ダンス", "挨拶", "歌", "スピーチ"],
+                    correct: 1,
+                    explanation: "中学校は台湾と交流があり、そこでもホームステイをしたり、代表で挨拶をしたりしていた。"
+                },
+                {
+                    question: "弥生の同級生が台湾交流のきっかけになった理由は？",
+                    options: ["留学経験があった", "台湾語が話せた", "台湾とのハーフだった", "台湾に親戚がいた"],
+                    correct: 2,
+                    explanation: "同級生が台湾とのハーフでその関係で台湾の中学と文化交流があった。"
+                },
+                {
+                    question: "弥生が英語について自己評価は？",
+                    options: ["全く話せない", "たぶんちょっと話せる", "ペラペラ", "ビジネスレベル"],
+                    correct: 1,
+                    explanation: "たぶんちょっと英語も話せる、と語っている。"
+                },
+                {
+                    question: "弥生が関西生活で突っ込まれることは？",
+                    options: ["服装", "イントネーション", "食べ方", "歩き方"],
+                    correct: 1,
+                    explanation: "結構イントネーションとか突っ込まれる。単語のイントネーションがおかしいみたいだ。"
+                },
+                {
+                    question: "弥生が上司の喋りについて思うことは？",
+                    options: ["楽しい", "勉強になる", "喋りが止まらない", "面白い"],
+                    correct: 2,
+                    explanation: "喋りが止まらず毎回「あーもうこんな時間」って目の前の席で言っている。"
+                },
+                {
+                    question: "弥生が質問した時の上司の返答の特徴は？",
+                    options: ["短くて的確", "質問の返答プラス自分の考えや価値観", "無視される", "怒られる"],
+                    correct: 1,
+                    explanation: "質問したら返答プラス自分の考えや価値観やら、私からしたら無駄な話がほぼ。"
+                },
+                {
+                    question: "弥生が上司が休みの時に感じることは？",
+                    options: ["寂しい", "少しだけハッピー", "不安", "何も感じない"],
+                    correct: 1,
+                    explanation: "今週は上司が休みらしくて、少しだけハッピー。"
+                },
+                {
+                    question: "弥生が別れてからどのくらいでアプリを再開した？",
+                    options: ["半年", "1年", "1年半", "2年"],
+                    correct: 1,
+                    explanation: "別れて1年だったので、またアプリをやってみた。"
+                }
+            ]
+        };
+
+        let currentQuiz = null;
+        let currentQuestion = 0;
+        let score = 0;
+        let selectedAnswers = [];
+        let startTime = null;
+        let shuffledQuestions = [];
+
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        function startQuiz(mode) {
+            currentQuiz = mode;
+            currentQuestion = 0;
+            score = 0;
+            selectedAnswers = [];
+            startTime = new Date();
+            
+            // Shuffle questions for random order
+            shuffledQuestions = shuffleArray(quizData[mode]);
+            
+            document.getElementById('modeSelection').style.display = 'none';
+            document.getElementById('quizScreen').style.display = 'block';
+            
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const questions = shuffledQuestions;
+            const question = questions[currentQuestion];
+            
+            document.getElementById('questionCounter').textContent = `問題 ${currentQuestion + 1} / ${questions.length}`;
+            document.getElementById('quizScore').textContent = `スコア: ${score}`;
+            document.getElementById('questionText').textContent = question.question;
+            
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            
+            const optionsContainer = document.getElementById('questionOptions');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.textContent = option;
+                optionElement.onclick = () => selectOption(index, optionElement);
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Hide explanation card
+            document.getElementById('explanationCard').style.display = 'none';
+            
+            updateButtons();
+        }
+
+        function selectOption(index, element) {
+            // Remove previous selections
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Add selection to clicked option
+            element.classList.add('selected');
+            selectedAnswers[currentQuestion] = index;
+            
+            // Show explanation
+            const questions = shuffledQuestions;
+            const question = questions[currentQuestion];
+            
+            setTimeout(() => {
+                if (index === question.correct) {
+                    element.classList.add('correct');
+                    score++;
+                    document.getElementById('quizScore').textContent = `スコア: ${score}`;
+                } else {
+                    element.classList.add('incorrect');
+                    // Show correct answer
+                    const correctOption = document.querySelectorAll('.option')[question.correct];
+                    correctOption.classList.add('correct');
+                }
+                
+                // Show explanation
+                document.getElementById('explanationContent').textContent = question.explanation;
+                document.getElementById('explanationCard').style.display = 'block';
+                
+                updateButtons();
+            }, 500);
+        }
+
+        function updateButtons() {
+            const prevButton = document.getElementById('prevButton');
+            const nextButton = document.getElementById('nextButton');
+            const questions = shuffledQuestions;
+            
+            prevButton.disabled = currentQuestion === 0;
+            
+            if (selectedAnswers[currentQuestion] !== undefined) {
+                nextButton.disabled = false;
+                if (currentQuestion === questions.length - 1) {
+                    document.getElementById('nextButtonText').textContent = '結果を見る';
+                } else {
+                    document.getElementById('nextButtonText').textContent = '次へ';
+                }
+            } else {
+                nextButton.disabled = true;
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+                
+                // Restore previous selection if exists
+                if (selectedAnswers[currentQuestion] !== undefined) {
+                    const options = document.querySelectorAll('.option');
+                    options[selectedAnswers[currentQuestion]].classList.add('selected');
+                }
+            }
+        }
+
+        function nextQuestion() {
+            const questions = shuffledQuestions;
+            
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+                
+                // Restore previous selection if exists
+                if (selectedAnswers[currentQuestion] !== undefined) {
+                    const options = document.querySelectorAll('.option');
+                    options[selectedAnswers[currentQuestion]].classList.add('selected');
+                }
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('quizScreen').style.display = 'none';
+            document.getElementById('resultScreen').style.display = 'block';
+            
+            const questions = shuffledQuestions;
+            const totalQuestions = questions.length;
+            const correctAnswers = score;
+            const percentage = Math.round((score / totalQuestions) * 100);
+            const endTime = new Date();
+            const timeSpent = Math.round((endTime - startTime) / 60000); // minutes
+            
+            // Update result display
+            document.getElementById('finalScore').textContent = `${score} / ${totalQuestions}`;
+            document.getElementById('correctAnswers').textContent = correctAnswers;
+            document.getElementById('totalQuestions').textContent = totalQuestions;
+            document.getElementById('accuracyRate').textContent = `${percentage}%`;
+            document.getElementById('timeSpent').textContent = `${timeSpent}分`;
+            
+            // Determine level and message
+            let level = '';
+            let message = '';
+            
+            if (percentage >= 90) {
+                level = '弥生マスター';
+                message = '素晴らしい！弥生のことを完璧に理解しています！';
+            } else if (percentage >= 80) {
+                level = '弥生エキスパート';
+                message = 'とても良い成績！弥生のことがよくわかっていますね。';
+            } else if (percentage >= 70) {
+                level = '弥生ファン';
+                message = 'まずまずの成績！もう少しでマスター級です。';
+            } else if (percentage >= 60) {
+                level = '弥生見習い';
+                message = '合格ライン！もう少し勉強すればもっと上がれます。';
+            } else {
+                level = '弥生初心者';
+                message = 'まだまだですが、これから一緒に学んでいきましょう！';
+            }
+            
+            document.getElementById('resultLevel').textContent = level;
+            document.getElementById('resultMessage').textContent = message;
+        }
+
+        function restartQuiz() {
+            document.getElementById('resultScreen').style.display = 'none';
+            document.getElementById('modeSelection').style.display = 'grid';
+            
+            currentQuiz = null;
+            currentQuestion = 0;
+            score = 0;
+            selectedAnswers = [];
+            startTime = null;
+            shuffledQuestions = [];
+        }
+
+        // Handle window resize for mobile
+        window.addEventListener('resize', function() {
+            // Adjust layout if needed
+            const quizControls = document.querySelector('.quiz-controls');
+            if (window.innerWidth <= 768) {
+                quizControls.style.flexDirection = 'row';
+            }
+        });
+    </script>
+</body>
+</html>
